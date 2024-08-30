@@ -1291,9 +1291,7 @@ have ref_m : refines Rseqmultinom m m'.
   move: (Hq' m'); rewrite F.add_eq_o; [|by apply/mnmc_eq_seqP]; move=> Hm'.
   apply (@refine_size_mpoly _ _ _ _ Hp).
   by exists c; apply M.find_2. }
-have Hc : p@_m = c.
-{ rewrite (refine_find_mpoly Hp ref_m) (Hq' m') F.add_eq_o //.
-  apply E.eq_refl. }
+have Hc : p@_m = c by rewrite (refine_find_mpoly Hp ref_m) (Hq' m') F.add_eq_o.
 pose pmcm := p - cm.
 have Hpmcm : pmcm@_m = 0.
 { by rewrite mcoeffB mcoeffZ mcoeffX eqxx Hc mulr1 subrr. }
@@ -1409,9 +1407,7 @@ apply P.fold_rec.
 move=> k' e q p'' p''' Hmap Hin Hadd Hind p ref_p.
 pose k := multinom_of_seqmultinom_val n k'.
 have Hk : refines Rseqmultinom k k'; [by apply (refine_size_add Hadd ref_p)|].
-have Hp : p@_k = e.
-{ rewrite (refine_find_mpoly ref_p Hk) Hadd F.add_eq_o //.
-  exact: E.eq_refl. }
+have Hp : p@_k = e by rewrite (refine_find_mpoly ref_p Hk) Hadd F.add_eq_o.
 pose p0 := (c * e) *: 'X_[m + k].
 pose pmpk := p - p@_k *: 'X_[k].
 have Hpmpk : pmpk@_k = 0.
@@ -1439,8 +1435,7 @@ apply refine_Madd_mnm_add.
   apply (@refine_size_mpoly _ _ _ _ ref_p).
   red in Hadd.
   apply/F.in_find_iff.
-  rewrite Hadd F.add_eq_o //.
-  exact/mnmc_eq_seqP.
+  rewrite Hadd F.add_eq_o => //.
 }
 { eapply Hind.
   apply (rem_mpoly_eff Hin Hadd ref_p Hk). }
